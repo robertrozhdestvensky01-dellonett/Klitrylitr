@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#111b16">
+<title>Guinness XO — Бутылка против пинты</title>
+<style>
+:root{--night:#101a16;--pine:#1a2b22;--green:#31523d;--gold:#d4b070;--gold2:#f1d6a0;--cream:#f8f1de;--ink:#183025;--muted:#9eaf9d;--line:rgba(241,214,160,.22)}
+*{box-sizing:border-box}html{height:100%;background:var(--night)}body{margin:0;min-height:100%;font-family:ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;background:radial-gradient(ellipse 80% 60% at 50% 5%,#335640 0%,transparent 70%),linear-gradient(155deg,#16281e,#101714 75%);color:var(--cream);display:flex;justify-content:center;align-items:center;padding:24px 16px;overflow-x:hidden}
+body:before{content:"";pointer-events:none;position:fixed;inset:0;opacity:.12;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.75' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' opacity='.5' filter='url(%23n)'/%3E%3C/svg%3E")}
+.shell{position:relative;width:min(100%,960px);border:1px solid #5d654b;background:linear-gradient(115deg,rgba(30,51,39,.97),rgba(15,28,21,.97));box-shadow:0 36px 105px #0008,0 3px 0 #0005;border-radius:25px;overflow:hidden}
+.shell:before{content:"";pointer-events:none;position:absolute;inset:9px;border:1px solid rgba(212,176,112,.13);border-radius:18px}
+.header{position:relative;padding:28px 34px 16px;text-align:center}
+.harp{font-size:28px;color:var(--gold);line-height:1;margin-bottom:3px}
+.eyebrow{font-size:11px;color:var(--gold2);letter-spacing:.34em;text-transform:uppercase;font-weight:700}
+h1{font-size:clamp(30px,5.5vw,49px);margin:8px 0 4px;font-family:Georgia,"Times New Roman",serif;letter-spacing:-.035em;font-weight:700}
+h1 em{font-style:normal;color:var(--gold2)}
+.subtitle{color:#a8b7a7;font-size:13px;margin:8px auto 0;line-height:1.55}
+.content{position:relative;display:grid;grid-template-columns:minmax(0,1fr) 345px;gap:34px;align-items:center;padding:15px 41px 36px}
+.mainpanel{min-width:0}
+.topline{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:13px}
+.roundtag{letter-spacing:.14em;color:var(--gold);font-size:10px;font-weight:800;text-transform:uppercase}
+.status{font-size:16px;min-height:23px;line-height:1.45;font-weight:650;color:var(--cream)}
+.status strong{color:var(--gold2)}
+.boardwrap{position:relative;border-radius:19px;background:#0e1712;border:1px solid rgba(242,222,173,.25);padding:11px;box-shadow:0 22px 45px #0006,0 2px 4px #0006}
+.board{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:7px;aspect-ratio:1;max-width:440px;width:100%;margin:auto}
+.cell{border:1px solid rgba(136,115,75,.4);border-radius:10px;background:linear-gradient(145deg,#f9f2e1,#e6d9b9);color:var(--ink);display:flex;align-items:center;justify-content:center;min-width:0;min-height:0;cursor:pointer;transition:transform .16s,background .16s,box-shadow .16s;position:relative;touch-action:manipulation;box-shadow:inset 0 1px 0 #fff9,0 3px 3px #0003}
+.cell:disabled{cursor:default}.cell:focus-visible{outline:3px solid var(--gold2);outline-offset:2px}
+.cell:enabled:hover{background:#fff9e7;transform:translateY(-2px);box-shadow:inset 0 1px 0 #fff,0 7px 10px #0004}
+.cell svg{width:55%;height:70%;max-height:89px;filter:drop-shadow(0 3px 2px #0002);animation:stamp .22s cubic-bezier(.2,1.4,.5,1)}
+.cell.win{background:linear-gradient(140deg,#f7dfaa,#e0b86c);box-shadow:inset 0 0 0 3px #d9a84d,0 0 20px #c69e4866}
+@keyframes stamp{from{opacity:.4;transform:scale(.64) rotate(-8deg)}to{opacity:1;transform:scale(1) rotate(0)}}
+.actions{display:flex;gap:9px;margin-top:14px}
+button{font:inherit}.action{border-radius:11px;min-height:42px;padding:10px 18px;cursor:pointer;font-size:12px;font-weight:750;letter-spacing:.01em;transition:background .2s,transform .2s}.action:hover{transform:translateY(-1px)}
+.primary{background:var(--gold);border:1px solid #f7d79d;color:#1d251b;flex:1}.primary:hover{background:#f3c982}
+.secondary{background:transparent;border:1px solid #67725d;color:#d4dbc9}.secondary:hover{background:#263a2b}
+.side{min-width:0}
+.score{display:grid;grid-template-columns:1fr 1fr 1fr;gap:7px;margin-bottom:25px}
+.scorecard{background:#253a2d;border:1px solid var(--line);padding:14px 5px 12px;border-radius:12px;text-align:center}
+.scorecard .n{font-family:Georgia,serif;font-size:31px;font-weight:700;line-height:1;color:var(--gold2);font-variant-numeric:tabular-nums}.scorecard .lbl{font-size:11px;color:#aebcad;margin-top:8px}
+.segmenttitle{margin:0 0 9px;font-size:11px;letter-spacing:.16em;text-transform:uppercase;font-weight:800;color:var(--gold)}
+.segments{display:flex;gap:5px;padding:4px;border:1px solid #5b6754;background:#0e1d16;border-radius:11px}
+.segment{flex:1;min-height:42px;padding:8px 7px;border:0;border-radius:8px;background:transparent;color:#a9b9a7;cursor:pointer;font-size:12px;font-weight:750;transition:background .18s}
+.segment.active{color:#233122;background:var(--cream);box-shadow:0 2px 8px #0004}
+.segment:focus-visible,.action:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+.modes{margin-top:21px}.difficulty{margin-top:17px}.difficulty[hidden]{display:none}
+.divider{height:1px;background:var(--line);margin:23px 0 17px}
+.legend{display:flex;flex-direction:column;gap:12px}.legendrow{display:flex;gap:10px;align-items:center;color:#e6e8d9;font-size:13px}
+.legendicon{width:37px;height:37px;display:flex;align-items:center;justify-content:center;background:#f5edd7;border:1px solid #c3af82;border-radius:10px;flex:0 0 auto}
+.legendicon svg{width:24px;height:31px}.legendrow small{display:block;color:#94a995;margin-top:2px;font-size:11px}
+.footer{border-top:1px solid rgba(212,176,112,.15);padding:16px 30px;text-align:center;color:#819786;font-size:11px;letter-spacing:.06em}
+.toast{position:absolute;top:48%;left:50%;width:min(84%,370px);transform:translate(-50%,-50%) scale(.85);border:1px solid var(--gold2);background:#15271feF;border-radius:16px;padding:20px 15px;text-align:center;pointer-events:none;opacity:0;box-shadow:0 17px 55px #0008;z-index:4;transition:opacity .25s,transform .25s}
+.toast.show{opacity:1;transform:translate(-50%,-50%) scale(1)}.toast b{font-family:Georgia,serif;color:var(--gold2);font-size:29px;display:block}.toast small{display:block;color:#d0dbca;margin-top:7px}
+@media(max-width:760px){body{padding:12px 9px;align-items:flex-start}.shell{border-radius:19px}.header{padding:21px 19px 8px}.content{grid-template-columns:1fr;gap:22px;padding:10px 18px 23px}.side{display:flex;flex-direction:column}.score{order:0;margin-bottom:17px}.modes{order:1;margin-top:0}.difficulty{order:2;margin-top:14px}.divider{order:3;margin:16px 0}.legend{order:4;display:grid;grid-template-columns:1fr 1fr;gap:8px}.legendrow{font-size:11px;gap:7px}.legendicon{width:29px;height:31px}.legendicon svg{height:26px;width:20px}.board{max-width:405px}.status{font-size:14px}.eyebrow{font-size:9px}.footer{font-size:10px;padding:12px 16px}.scorecard{padding:10px 3px}.scorecard .n{font-size:25px}}
+@media(min-width:761px){.board{max-width:438px}}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{animation-duration:.001ms!important;transition-duration:.001ms!important}}
+</style>
+</head>
+<body>
+<div class="shell" id="guinness-xo">
+ <header class="header"><div class="harp" aria-hidden="true">✦</div><div class="eyebrow">THE STOUT CLUB · EST. 1759</div><h1>Guinness <em>X / O</em></h1><p class="subtitle">Крестики-нолики, только вместо крестиков и ноликов — бутылка и пинта.</p></header>
+ <div class="content">
+  <main class="mainpanel">
+   <div class="topline"><span class="roundtag" id="round">РАУНД 01</span><span class="status" id="status" role="status" aria-live="polite">Ход <strong>бутылки</strong></span></div>
+   <div class="boardwrap"><div class="board" id="board" role="group" aria-label="Поле 3 на 3"></div><div class="toast" id="toast" aria-live="polite"><b id="toasttitle"></b><small id="toastsub"></small></div></div>
+   <div class="actions"><button class="action primary" id="reset" type="button">↻ Новая партия</button><button class="action secondary" id="resetall" type="button">Сбросить счёт</button></div>
+  </main>
+  <aside class="side">
+   <div class="score"><div class="scorecard"><div class="n" id="bottlescore">0</div><div class="lbl">Бутылка</div></div><div class="scorecard"><div class="n" id="drawscore">0</div><div class="lbl">Ничья</div></div><div class="scorecard"><div class="n" id="pintscore">0</div><div class="lbl">Пинта</div></div></div>
+   <div class="modes"><p class="segmenttitle">Режим игры</p><div class="segments" role="group" aria-label="Режим"><button class="segment active" type="button" data-mode="friend" aria-pressed="true">Друг против друга</button><button class="segment" type="button" data-mode="cpu" aria-pressed="false">Против бота</button></div></div>
+   <div class="difficulty" id="difficulty" hidden><p class="segmenttitle">Сложность бота</p><div class="segments" role="group" aria-label="Сложность"><button class="segment active" type="button" data-diff="easy" aria-pressed="true">Легко</button><button class="segment" type="button" data-diff="hard" aria-pressed="false">Сложно</button></div></div>
+   <div class="divider"></div>
+   <div class="legend"><div class="legendrow"><span class="legendicon" id="bottlelegend" aria-hidden="true"></span><span><b>Бутылка Guinness</b><small>Всегда начинает первой</small></span></div><div class="legendrow"><span class="legendicon" id="pintlegend" aria-hidden="true"></span><span><b>Пинта стаута</b><small>Второй игрок или бот</small></span></div></div>
+  </aside>
+ </div>
+ <div class="footer">ТРИ В РЯД · НИКАКИХ КОМПРОМИССОВ · JUST ONE MORE ROUND</div>
+</div>
+<script>
+(function(){
+'use strict';
+const bottle = `<svg viewBox="0 0 80 116" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><defs><linearGradient id="bb" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#263d2d"/><stop offset=".6" stop-color="#101d18"/><stop offset="1" stop-color="#304a37"/></linearGradient></defs><path d="M34 5H46V21L50 28V38C50 43 59 46 59 56V105Q59 111 53 111H27Q21 111 21 105V56C21 46 30 43 30 38V28L34 21V5Z" fill="url(#bb)" stroke="#a98749" stroke-width="2"/><rect x="32" y="2" width="16" height="10" rx="2" fill="#c2a367" stroke="#8f7239" stroke-width="1.5"/><rect x="25" y="61" width="30" height="35" rx="3" fill="#ebdbb4" stroke="#c6a464"/><path d="M34 68h12" stroke="#ad8140" stroke-width="1"/><path d="M41 69c-5 3-7 7-5 11 2 4 9 3 9-1V69M42 72l-7 5" stroke="#ae8a4f" stroke-width="1.7"/><text x="40" y="89" text-anchor="middle" font-size="8.4" font-family="Georgia,serif" font-weight="700" fill="#15231a">GUINNESS</text><rect x="33" y="26" width="14" height="19" rx="1" fill="#a9864a" opacity=".8"/><path d="M27 54v48" stroke="#68806a" opacity=".38" stroke-width="2.5"/></svg>`;
+const pint = `<svg viewBox="0 0 80 116" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><defs><linearGradient id="pb" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#3a2822"/><stop offset=".6" stop-color="#141916"/><stop offset="1" stop-color="#403025"/></linearGradient></defs><path d="M17 24H63L56 100Q55 108 47 108H33Q25 108 24 100L17 24Z" fill="url(#pb)" stroke="#987849" stroke-width="2.5"/><path d="M16 23C13 14 19 10 24 12 25 5 34 6 38 10 44 4 52 7 54 12 64 10 67 18 63 24Z" fill="#fff7dd" stroke="#d1b78b" stroke-width="2"/><path d="M22 31h36" stroke="#dcc29a" opacity=".6"/><path d="M25 37L30 96" stroke="#9e8a68" stroke-width="2.5" opacity=".55"/><path d="M34 107h12" stroke="#b38c50" stroke-width="4" stroke-linecap="round"/><text x="40" y="75" text-anchor="middle" font-size="10" font-family="Georgia,serif" font-weight="700" fill="#eed59e" transform="rotate(-2 40 75)">STOUT</text></svg>`;
+const lines=[[0,1,2],[3,4,5],[6,7,8],[0,3,6],[1,4,7],[2,5,8],[0,4,8],[2,4,6]];
+let mode='friend',difficulty='easy',cells=Array(9).fill(null),turn='bottle',finished=false,round=1,score={bottle:0,pint:0,draw:0},winCells=[];
+let botTimer=null,toastTimer=null;
+const $=s=>document.querySelector(s);
+const board=$('#board'),status=$('#status');
+$('#bottlelegend').innerHTML=bottle;$('#pintlegend').innerHTML=pint;
+function outcome(a){for(const line of lines){if(a[line[0]]&&a[line[0]]===a[line[1]]&&a[line[0]]===a[line[2]])return {winner:a[line[0]],line};}return a.every(Boolean)?{winner:'draw',line:[]}:null;}
+function draw(){board.innerHTML='';cells.forEach((p,i)=>{let c=document.createElement('button');c.type='button';c.className='cell'+(winCells.includes(i)?' win':'');c.dataset.index=i;c.setAttribute('aria-label',`${i+1}: ${p==='bottle'?'бутылка':p==='pint'?'пинта':'пусто'}`);c.disabled=Boolean(p)||finished||(mode==='cpu'&&turn==='pint');if(p)c.innerHTML=p==='bottle'?bottle:pint;c.addEventListener('click',()=>move(i));board.appendChild(c);});$('#bottlescore').textContent=score.bottle;$('#pintscore').textContent=score.pint;$('#drawscore').textContent=score.draw;$('#round').textContent='РАУНД '+String(round).padStart(2,'0');}
+function showToast(title,desc){clearTimeout(toastTimer);$('#toasttitle').textContent=title;$('#toastsub').textContent=desc;$('#toast').classList.add('show');toastTimer=setTimeout(()=>$('#toast').classList.remove('show'),1700);}
+function move(i){if(finished||cells[i]||(mode==='cpu'&&turn==='pint'))return;apply(i,turn);if(!finished&&mode==='cpu'&&turn==='pint')scheduleBot();}
+function apply(i,p){if(cells[i]||finished)return;cells[i]=p;let result=outcome(cells);if(result){finished=true;winCells=result.line;if(result.winner==='draw'){score.draw++;status.innerHTML='Ничья! <strong>Реванш?</strong>';showToast('Ничья!','Пора за новой партией.');}else{score[result.winner]++;const who=result.winner==='bottle'?'Бутылка':'Пинта';status.innerHTML='Победа: <strong>'+who.toLowerCase()+'</strong>!';showToast('Победа!','Три в ряд — '+who.toLowerCase()+'.');}}else{turn=p==='bottle'?'pint':'bottle';status.innerHTML='Ход <strong>'+(turn==='bottle'?'бутылки':'пинты')+'</strong>'+(mode==='cpu'&&turn==='pint'?' · бот думает…':'');}draw();}
+function bestMove(b){let best=-Infinity,moves=[];for(let i=0;i<9;i++){if(b[i])continue;b[i]='pint';let v=minimax(b,false,0);b[i]=null;if(v>best){best=v;moves=[i];}else if(v===best){moves.push(i);}}return moves[Math.floor(Math.random()*moves.length)];}
+function minimax(b,maximizing,depth){const o=outcome(b);if(o)return o.winner==='pint'?10-depth:o.winner==='bottle'?depth-10:0;let best=maximizing?-Infinity:Infinity;for(let i=0;i<9;i++){if(b[i])continue;b[i]=maximizing?'pint':'bottle';const n=minimax(b,!maximizing,depth+1);b[i]=null;best=maximizing?Math.max(n,best):Math.min(n,best);}return best;}
+function scheduleBot(){clearTimeout(botTimer);botTimer=setTimeout(()=>{if(finished||mode!=='cpu'||turn!=='pint')return;let choices=cells.map((v,i)=>v===null?i:-1).filter(i=>i>=0);let i=difficulty==='hard'?bestMove(cells.slice()):choices[Math.floor(Math.random()*choices.length)];apply(i,'pint');},420);}
+function reset(all){clearTimeout(botTimer);clearTimeout(toastTimer);$('#toast').classList.remove('show');cells=Array(9).fill(null);turn='bottle';finished=false;winCells=[];if(all){score={bottle:0,pint:0,draw:0};round=1;}else{round++;}status.innerHTML='Ход <strong>бутылки</strong>';draw();}
+$('#reset').addEventListener('click',()=>reset(false));$('#resetall').addEventListener('click',()=>reset(true));
+document.querySelectorAll('[data-mode]').forEach(btn=>btn.addEventListener('click',()=>{mode=btn.dataset.mode;document.querySelectorAll('[data-mode]').forEach(x=>{const a=x===btn;x.classList.toggle('active',a);x.setAttribute('aria-pressed',a)});$('#difficulty').hidden=mode!=='cpu';reset(true);}));
+document.querySelectorAll('[data-diff]').forEach(btn=>btn.addEventListener('click',()=>{difficulty=btn.dataset.diff;document.querySelectorAll('[data-diff]').forEach(x=>{const a=x===btn;x.classList.toggle('active',a);x.setAttribute('aria-pressed',a)});reset(true);}));
+draw();
+})();
+</script>
+</body></html>
